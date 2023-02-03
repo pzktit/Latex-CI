@@ -1,0 +1,29 @@
+\documentclass[11pt]{article}
+\usepackage[ddmmyyyy,24hr]{datetime}
+\renewcommand{\dateseparator}{.}
+\renewcommand{\timeseparator}{:}
+\usepackage{lipsum}  %% Package to create dummy text (comment or erase before start)
+
+\author{Piotr ZAWADZKI}
+\title{Sample document}
+\date{\today, \currenttime}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    \lipsum[1] %% Dummy text for abstract. Erase before use.
+\end{abstract}
+    
+
+
+\section{Introduction}
+
+\lipsum[2-6]
+
+\section{Conclusions}
+
+\lipsum[10]
+
+\end{document}
