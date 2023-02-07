@@ -24,9 +24,9 @@ jobs:
       - name: Compile latex document
         uses: docker://ghcr.io/pzktit/texlivedev:latest
         with:
-          entrypoint: /bin/sh
+          entrypoint: /bin/bash
           args: |
-            -c "ls -l . && date && latexmk"
+            -c "ls -l . && date && sudo latexmk"
 
       - name: Populate output file
         run: mkdir --parent ./public && cp *.pdf ./public/
