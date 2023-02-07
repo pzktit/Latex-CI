@@ -16,13 +16,17 @@ permissions:
 jobs:
   build_latex:
     runs-on: ubuntu-latest
-    container: ghcr.io/pzktit/texlivedev:latest
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v3
         
       - name: Compile latex document
-        run: (ls . && latexmk)
+        uses: docker://ghcr.io/pzktit/texlivedev:latest
+        with:
+          entrypoint: /bin/sh
+          args: |
+            -c "\
+            date && ls . && latexmk"
 
       - name: Populate output file
         run: mkdir --parent ./public && cp *.pdf ./public/
