@@ -1,13 +1,12 @@
-
 name: Compile Latex and Release PDF  
-
 
 on:
   push:
     tags:
-      - '*.*.*'
+      - 'v*.*.*'
     branches:
       - main
+    workflow_dispatch:
 
 permissions:
   actions: 'write'
@@ -21,19 +20,24 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v3
 
-      - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v2
-        with:
-          root_file: main.tex
+    runs:
+      using: docker
+      image: docker://ghcr.io/xu-cheng/texlive-full:latest
+      entrypoint: /bin/bash
+      args: 
+        - -eo
+        - pipefail
+        - -c
+        - "latexmk -lualatex main.tex"
 
-      - name: Populate output file
-        run: mkdir --parent ./public && cp *.pdf ./public/
+      # - name: Populate output file
+      #   run: mkdir --parent ./public && cp *.pdf ./public/
           
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./public
 
       # - name: Create Release
       #   id: create_release
