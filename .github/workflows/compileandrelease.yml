@@ -26,7 +26,7 @@ jobs:
         with:
           entrypoint: /bin/bash
           args: |
-            -c "ls -l . && date && sudo latexmk"
+            -c "whoami && pwd && ls -l . && date && sudo latexmk -lualatex"
 
       - name: Populate output file
         run: mkdir --parent ./public && cp *.pdf ./public/
