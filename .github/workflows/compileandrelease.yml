@@ -12,6 +12,7 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  actions: write
     
 jobs:
   build_latex:
@@ -25,8 +26,7 @@ jobs:
         with:
           entrypoint: /bin/sh
           args: |
-            -c "\
-            date && ls . && latexmk"
+            -c "ls -l . && date && latexmk"
 
       - name: Populate output file
         run: mkdir --parent ./public && cp *.pdf ./public/
