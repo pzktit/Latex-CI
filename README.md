@@ -23,7 +23,7 @@ However, it makes the instantiation process of the Devcontainer for the new docu
 Two avoid this complication, the *LTeX* system is installed inside the container, and the extension is informed where it can be found (see entry ``"ltex.ltex-ls.path": "/usr"`` in file ``.devcontainer/devcontainer.json``).
 Such setup speedups the first bootstrap of the devcontainer instance so greatly, that the devcontainer can be deleted after its use (see the entry ``"runArgs": ["--rm", "--name=texlivedev-sample"]`` in file ``.devcontainer/devcontainer.json``) without a significant loss in performance.
 
-Please note that *VSCode* extensions are installed in the help of the [VSCode-server](https://code.visualstudio.com/docs/remote/vscode-server), which is closed source tool and some legal limitations may apply.
+Please note that *VSCode* extensions are installed with the help of the [VSCode-server](https://code.visualstudio.com/docs/remote/vscode-server), which is closed source tool and some legal limitations may apply.
 
 ## How to use it?
 
