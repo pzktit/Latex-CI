@@ -4,40 +4,34 @@ on:
   push:
     tags:
       - 'v*.*.*'
-    branches:
-      - main
-    workflow_dispatch:
+#     branches:
+#       - main
+  workflow_dispatch:
 
 permissions:
-  actions: 'write'
+#   actions: 'write'
   contents: 'write'
-  id-token: 'write'
+#   id-token: 'write'
     
 jobs:
   build_latex:
     runs-on: ubuntu-latest
+    container: ghcr.io/pzktit/texlivedev:latest
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v3
+        
+      - name: Compile latex document
+        run: (ls . && latexmk)
 
-    runs:
-      using: docker
-      image: docker://ghcr.io/xu-cheng/texlive-full:latest
-      entrypoint: /bin/bash
-      args: 
-        - -eo
-        - pipefail
-        - -c
-        - "latexmk -lualatex main.tex"
-
-      # - name: Populate output file
-      #   run: mkdir --parent ./public && cp *.pdf ./public/
+      - name: Populate output file
+        run: mkdir --parent ./public && cp *.pdf ./public/
           
-      # - name: Deploy
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./public
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
 
       # - name: Create Release
       #   id: create_release
