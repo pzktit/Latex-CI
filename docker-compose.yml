@@ -1,0 +1,12 @@
+version: '3'
+services:
+  latexbuild:
+    image: ghcr.io/pzktit/texlivedev
+    container_name: latexbuild
+    user: ${UGID}
+    volumes:
+      - '.:/home/vscode'
+    stdin_open: true
+    tty: true
+    command: 'latexmk -g -lualatex main.tex'
+
