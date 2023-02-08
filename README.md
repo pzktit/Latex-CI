@@ -35,6 +35,12 @@ Usually *LTeX* is downloaded (ca. 200 MB) by the extension ([valentjn.vscode-lte
 However, it makes the devcontainer instantiation process quite long and requires network access.
 Two avoid this complication, the *LTeX* system is installed inside the container, and the extension is informed where the engine can be found (see entry ``"ltex.ltex-ls.path": "/usr"`` in file ``.devcontainer/devcontainer.json``).
 Such setup speedups the first bootstrap of the devcontainer instance so greatly, that it can be removed after its use (see the entry ``"runArgs": ["--rm", "--name=texlivedev-sample"]`` in file ``.devcontainer/devcontainer.json``) without a significant loss in performance.
+However, in that case all your *VSCode*'s workspace customizations will be lost.
+If you are going to open the document many times, then you can safely remove the ``--rm`` option. The preinstallation of extensions and *LTeX* makes that disk space footprint of container instances is not high.
+It may be checked with
+```
+docker system df
+```
 
 Please note that *VSCode* extensions are installed with the help of the [VSCode-server](https://code.visualstudio.com/docs/remote/vscode-server), which is closed source tool and some legal limitations may apply.
 
